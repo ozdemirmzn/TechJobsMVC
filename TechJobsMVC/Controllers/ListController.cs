@@ -58,8 +58,16 @@ namespace TechJobsMVC.Controllers
                 }
                 else {
                     jobs = JobData.FindByValue(value);
+                    ViewBag.title = "Jobs with " + ColumnChoices[column] + ": " + value;
                 }
                 }
+            else if (String.IsNullOrWhiteSpace(value))
+            {
+                jobs = null;
+                return Redirect("/List");
+
+            }
+
                 else
                 {
                     jobs = JobData.FindByColumnAndValue(column, value);
