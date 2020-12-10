@@ -43,19 +43,24 @@ namespace TechJobsMVC.Controllers
         // list jobs by column and value
         public IActionResult Jobs(string column, string value)
         {
-            List<Job> jobs;
-            if (column.ToLower().Equals("all"))
+            if (TempData["column"] != null)
             {
-                jobs = JobData.FindAll();
-                ViewBag.title = "All Jobs";
-            }
-            else
-            {
-                jobs = JobData.FindByColumnAndValue(column, value);
-                ViewBag.title = "Jobs with " + ColumnChoices[column] + ": " + value;
-            }
-            ViewBag.jobs = jobs;
 
+                column = (string)TempData["column"];
+                value = (string)TempData["value"]; }
+                List<Job> jobs;
+                if (column.ToLower().Equals("all"))
+                {
+                    jobs = JobData.FindAll();
+                    ViewBag.title = "All Jobs";
+                }
+                else
+                {
+                    jobs = JobData.FindByColumnAndValue(column, value);
+                    ViewBag.title = "Jobs with " + ColumnChoices[column] + ": " + value;
+                }
+                ViewBag.jobs = jobs;
+            
             return View();
         }
 

@@ -21,9 +21,10 @@ namespace TechJobsMVC.Controllers
         
         [HttpPost]
         public IActionResult Results(string searchType, string searchTerm)
-        { 
-
-                return Redirect("/list/jobs");
+        {
+            TempData["column"] = searchType;
+            TempData["value"] = searchTerm;
+            return Redirect("/list/jobs");
         }
     }
 
