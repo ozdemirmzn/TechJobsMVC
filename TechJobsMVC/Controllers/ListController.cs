@@ -51,8 +51,14 @@ namespace TechJobsMVC.Controllers
                 List<Job> jobs;
                 if (column.ToLower().Equals("all"))
                 {
+                if (String.IsNullOrWhiteSpace(value))
+                {
                     jobs = JobData.FindAll();
                     ViewBag.title = "All Jobs";
+                }
+                else {
+                    jobs = JobData.FindByValue(value);
+                }
                 }
                 else
                 {
